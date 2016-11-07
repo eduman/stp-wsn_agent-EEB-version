@@ -77,10 +77,10 @@ class STPAgent(object):
 			self.stop()
 
 		try: 
-			self.serial = serial.Serial(COM_PORT,9600)
+			self.serial = serial.Serial(self.comport,9600)
 			if not self.serial.isOpen():
 				self.serial.open()
-			signal.signal(signal.SIGINT, signal_handler)
+			signal.signal(signal.SIGINT, self.signal_handler)
 		except Exception, e:
 			self.logger.error("Unable to run the agent due to serial port issues: % s" % (e))
 			self.stop()
